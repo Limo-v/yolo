@@ -36,9 +36,9 @@ services:
       - "5000:5000"
     networks:
       - back-net  
+      - front-net
     
-    env_file:
-      - .env
+   
     
 
   # FRONTEND Container
@@ -57,7 +57,8 @@ services:
     container_name: kibet-client
     ports:
       - "8080:80"
-    env_file:
+    networks:
+      - front-net
 
 volumes:
   mongo-database:
@@ -65,4 +66,6 @@ volumes:
 
 networks:
   back-net:
+    driver: bridge
+  front-net:
     driver: bridge
