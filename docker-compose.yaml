@@ -15,6 +15,8 @@ services:
       - mongo-database:/data/db
     env_file:
       - .env
+    networks:
+      - back-net
 
   # BACKEND Container
   kibet-backend:
@@ -33,13 +35,34 @@ services:
     ports:
       - "5000:5000"
     networks:
-      - back-net
-      - kibet-net
+      - back-net  
     
     env_file:
       - .env
+    
+
+  # FRONTEND Container
+  kibet-client:
+    image: kibet/kibet-client:v1.0.0
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        buildversion: v1.0.0
+
+    # interactive mode like docker run -it
+    stdin_open: true
+    tty: true
+    restart: always
+    container_name: kibet-client
+    ports:
+      - "8080:80"
+    env_file:
 
 volumes:
   mongo-database:
-    name: mongo-database
     driver: local
+
+networks:
+  back-net:
+    driver: bridge
