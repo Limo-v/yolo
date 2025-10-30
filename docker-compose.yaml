@@ -1,7 +1,7 @@
 # version: "1.0"
 
 services:
-# DATABASE Container
+  # DATABASE Container
   kibet-database:
     image: mongo:3.0
     restart: always
@@ -13,6 +13,29 @@ services:
       - "27017:27017"
     volumes:
       - mongo-database:/data/db
+    env_file:
+      - .env
+
+  # BACKEND Container
+  kibet-backend:
+    image: kibet/kibet-backend:v1.0.0
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        buildversion: v1.0.0
+
+    # interactive mode like docker run -it
+    stdin_open: true
+    tty: true
+    restart: always
+    container_name: kibet-backend
+    ports:
+      - "5000:5000"
+    networks:
+      - back-net
+      - kibet-net
+    
     env_file:
       - .env
 
