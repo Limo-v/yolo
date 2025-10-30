@@ -1,29 +1,40 @@
-# Use an official Node runtime as a parent image
-FROM node:14 AS build
+# Stage 1 Bulding stages 
+FROM node:alpine AS build
+LABEL author="Victor Kibet"
 
-# Set the working directory in the container
+ARG buildversion
+# Environment variables
+ENV port=5000
+ENV build=$buildversion
+ENV NODE_ENV=production
+
+# Working path for the hosting app
 WORKDIR /usr/src/app
 
-# Copy the package.json and package-lock.json files to the container
+# Copy dependency files
 COPY package*.json ./
+# Install prod dependencies only to reduce image size omitting dev dependencies
+# RUN npm install --prod --omit=dev
+RUN npm ci --omit=dev
 
-# Install application dependencies
-RUN npm install
 
-# Copy the rest of the application code to the container
+
+# Copy entire source code from the host to the working directory of container
 COPY . .
 
-#Add multi-stage build
-FROM alpine:3.16.7
+# stage 2 - Running stage
+FROM alpine:3.1 AS prod
+# Working path for container
+WORKDIR /usr/src/app
 
-WORKDIR /app
+# not caching the package index to keep image size small
+# RUN apk add --no-cache nodejs npm
 
-RUN apk update && apk add --update nodejs
+# copy files from build stage to working dir of container
+COPY --from=build /usr/src/app ./
 
-COPY --from=build /usr/src/app /app
+EXPOSE $port
 
-# Expose the port the app runs on
-EXPOSE 5000
-
-# Define the command to run your app
+RUN echo "Build version: $build"
+# Start the server
 CMD ["node", "server.js"]
