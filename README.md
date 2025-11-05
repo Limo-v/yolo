@@ -70,13 +70,13 @@ Create dockerfile and test using this command
 
 ``` docker image build -t alpine_image_image:v1.0.0 backend/```
 
-![Test for Dockerfile images ](./docs/images/image.png)
+![Test for Dockerfile images ](image.png)
     
 after building confirm the image that has been built as well.
 
 ``` docker images ```
 
-![Test for Dockerfile images ](./docs/images/dockerhub-images.png)
+![Test for Dockerfile images ](dockerhub-images.png)
     
 Using multi-stage builds with alpine base reduces the final image size significantly.
 
@@ -125,7 +125,7 @@ To remove containers, networks, and volumes:
 ### FInal Images 
 Here are the final images less than 400mbs
 
-![alt text](/docs/images/final containers.png)
+![alt text](final containers.png)
 
 ```bash
         +------------------+
