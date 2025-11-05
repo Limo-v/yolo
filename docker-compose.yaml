@@ -20,7 +20,7 @@ services:
 
   # BACKEND Container
   kibet-backend:
-    image: kibet/kibet-backend:v1.0.0
+    image: kibet6/kibet-backend:v1.0.0
     build: 
       context: ./backend
       dockerfile: Dockerfile
@@ -43,7 +43,7 @@ services:
 
   # FRONTEND Container
   kibet-client:
-    image: kibet/kibet-client:v1.0.0
+    image: kibet6/kibet-client:v1.0.0
     build: 
       context: ./client
       dockerfile: Dockerfile
