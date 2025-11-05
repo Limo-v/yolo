@@ -20,12 +20,11 @@ services:
 
   # BACKEND Container
   kibet-backend:
-    image: kibet6/kibet-backend:v1.0.0
+    image: kibet6/kibet-backend
     build: 
       context: ./backend
       dockerfile: Dockerfile
-      args:
-        buildversion: v1.0.0
+      
 
     # interactive mode like docker run -it
     stdin_open: true
@@ -43,12 +42,11 @@ services:
 
   # FRONTEND Container
   kibet-client:
-    image: kibet6/kibet-client:v1.0.0
+    image: kibet6/kibet-client
     build: 
       context: ./client
       dockerfile: Dockerfile
-      args:
-        buildversion: v1.0.0
+     
 
     # interactive mode like docker run -it
     stdin_open: true
