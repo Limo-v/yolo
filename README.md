@@ -125,7 +125,7 @@ To remove containers, networks, and volumes:
 ### FInal Images 
 Here are the final images less than 400mbs
 
-![alt text](final containers.png)
+![alt text](final-images.png)
 
 ```bash
         +------------------+
