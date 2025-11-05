@@ -61,7 +61,6 @@ You can verify using:
 
 ``` docker images```
 
-![Test for Dockerfile images ](./docs/images/image-3.png)
     
 Expected: The image builds successfully.
 
@@ -77,7 +76,7 @@ after building confirm the image that has been built as well.
 
 ``` docker images ```
 
-![Test for Dockerfile images ](./docs/images/image-5.png)
+![Test for Dockerfile images ](./docs/images/dockerhub-images.png)
     
 Using multi-stage builds with alpine base reduces the final image size significantly.
 
@@ -97,12 +96,12 @@ Step 1: Set up your first microservice (database container using MongoDB).
 - Set up a storage by creating a volume and attaching it to the MongoDB container to preserve data across restarts.
 
 Step 2: Create the Backend Container
-- Tag the image with a suitable name and version, for example: `kibet/kibet-client:v1.0.0`
+- Tag the image with a suitable name and version, for example: `kibet6/kibet-client`
 - Specify the build path, such as `/backend`
 - Run interactively which is optional (docker run -it)
 - Attach the container to the previously created network to enable communication with other services. 
 
-![alt text](./docs/images/image-4.png)
+
 
 ### Running the Application
 
@@ -126,7 +125,7 @@ To remove containers, networks, and volumes:
 ### FInal Images 
 Here are the final images less than 400mbs
 
-![alt text](/docs/images/image-6.png)
+![alt text](/docs/images/final containers.png)
 
 ```bash
         +------------------+
